@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{title}}{% endblock %} - Frequently Asked Questions</h1>
+{% endblock %}
+
+{% block content%}
+<div style="width: 100%;" >
+  <h3><b>Q: </b>What is Guelph Alerts?</h3>
+  <p><b>A: </b>Guelph Alerts is an application designed to allow students to be sign up to be alerted when sections in the course they want open up</p>
+  <h3><b>Q: </b>How does Guelph Alerts work?</h3>
+  <b>A: </b>
+  <ol style='margin-left: 30px;'>
+    <li>Use the homepage to search for courses</li>
+    <li>Add those courses to the course cart</li>
+    <li>After all courses are added, go to the course cart to fill in your email and submit your courses</li>
+    <li>Sit back, relax, and wait to be alerted via email!</li>
+  </ol>
+  <h3><b>Q: </b> How many courses can I get an alert on? </h3>
+  <p><b>A: </b>At the moment, I have limited it to 5 per person due to a restriction imposed by webadvisor</p>
+  <h3><b>Q: </b>How long will my courses be monitored?</h3>
+  <p><b>A: </b>At the moment, the period is set to 2 weeks. You can re-register them after the 2 week period as much as you want.</p>
+  <h3><b>Q: </b>Will I get registered in the courses?</h3>
+  <p><b>A: </b>Unfortunately no. For this, we would need you uoguelph username and password. Also, I'm not sure if it goes against UoG policies</p>
+  <h3><b>Q: </b>Is this guaranteed to get me into the course I want?</h3>
+  <p><b>A: </b>Unfortunately it is not. In some cases, the section could fill up before you login and register</p>
+  <h3><b>Q: </b>Why am I not getting notifications?</h3>
+  <p><b>A: </b>This project was a practice project, so there may be some bugs. Email me at <a href="stwoudie@gmail.com">stwoudie@gmail.com</a> if you notice any issues and I will look into them!</p>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+<!doctype html>
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link href="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.js"></script>
+  
+  <title>{% block title %}{% endblock %} - Guelph Alert</title>
+</head>
+
+<nav class="navbar navbar-expand-md navbar-light">
+  <a style='text-decoration: none;' class='navbar-brand' href='/'><h1 id='home-btn'> Guelph <span> Alert </span> </h1></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span style='color: white' class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/cart"><p>Cart</p></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/faq"><i>faq</i></a>
+      </li>   
+    </ul>
+  </div>  
+</nav>
+
+<header>
+  {% block header %}{% endblock %}
+</header>
+
+<section class="content">
+
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>
+
+<footer class='footer'>
+    <span>© <a href="http://woudie.me/">Stephen Abraham</a></span>
+</footer>

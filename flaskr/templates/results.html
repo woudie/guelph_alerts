@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{title}}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <div class='table-responsive'>
+        <table 
+            class="table"
+            data-search="true"
+            data-toolbar="#toolbar"
+            data-click-to-select="true">
+            <thead>
+                <th scope="col" data-checkbox="true"></th>
+                <th data-field="Section Name and Title">Section</th>
+                <th data-field="Faculty">Faculty</th>
+                <th data-field="Available/ Capacity">Capacity</th>
+            </thead>
+        </table>
+        <div id="toolbar">
+            <button id="button" class="btn btn-outline-secondary" form="toolbar" value="Submit">Add</button>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            const $table = $('.table');
+            const $button = $('#button');
+
+            const data = {{courses|tojson}};
+            $table.bootstrapTable({data: data});
+                    
+            $button.click(function (e) {
+                var curr_data = JSON.parse(sessionStorage.getItem('user_courses'))
+                var collected = $table.bootstrapTable('getSelections');
+                curr_data = curr_data ? curr_data : [];
+                if( curr_data.length + collected.length <= 5 || collected.length > 0){
+                    collected = collected.filter(course => {
+                        return !curr_data.some(element => element['Section Name and Title'] === course['Section Name and Title'])
+                    })
+                    sessionStorage.setItem('user_courses', JSON.stringify( [...curr_data, ...collected] ));
+                    location.href = "/cart";
+                }else{
+                    alert('Cannot have more than 5 courses at a time in your course cart')
+                }
+            })
+        })
+    </script>
+{% endblock %}

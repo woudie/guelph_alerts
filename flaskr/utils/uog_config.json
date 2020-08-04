@@ -1,0 +1,7 @@
+{
+    "urls": {
+        "token":"https://webadvisor.uoguelph.ca/WebAdvisor/WebAdvisor?CONSTITUENCY=WBST&type=P&pid=ST-WESTS12A&TOKENIDX=",
+        "post": "https://webadvisor.uoguelph.ca/WebAdvisor/WebAdvisor?TOKENIDX=<>&SS=1&APP=ST&CONSTITUENCY=WBST"
+    },
+    "subjects": ["ACCT", "AGR", "AHSS", "ANSC", "ANTH", "ARAB", "ARTH", "ASCI", "AVC", "BADM", "BINF", "BIOC", "BIOL", "BIOM", "BIOP", "BIOT", "BOT", "BUS", "CCJP", "CDE", "CHEM", "CHIN", "CIS", "CLAS", "CLIN", "CME", "CONS", "COOP", "CROP", "CRWR", "CST", "CTS", "DAFL", "DAGR", "DENM", "DEQN", "DFN", "DHRT", "DTM", "DVT", "ECON", "ECS", "EDRD", "ENGG", "ENGL", "ENVM", "ENVS", "EQN", "EURO", "FARE", "FCSS", "FIN", "FINA", "FOOD", "FRAN", "FREN", "FRHD", "FSQA", "GEOG", "GERM", "GREK", "HHNS", "HISP", "HIST", "HK", "HORT", "HROB", "HTM", "HUMN", "IBIO", "IDEV", "IMPR", "INDG", "IPS", "ISS", "ITAL", "JUST", "KIN", "LACS", "LARC", "LAT", "LEAD", "LING", "LTS", "MATH", "MBG", "MCB", "MCS", "MDST", "MGMT", "MICR", "MUSC", "NANO", "NEUR", "NUTR", "OAGR", "ONEH", "PABI", "PATH", "PBIO", "PHIL", "PHYS", "PLNT", "POLS", "POPM", "PORT", "PSYC", "REAL", "RPD", "RST", "SART", "SCMA", "SOAN", "SOC", "SOPR", "SPAN", "STAT", "THST", "TOX", "TRMH", "UNIV", "VETM", "WMST", "XSEN", "ZOO"]
+}

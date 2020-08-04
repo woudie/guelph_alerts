@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{title}}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <div class='table-responsive'>
+        <table 
+            class="table"
+            data-toolbar="#toolbar"
+            data-click-to-select="true">
+            <thead>
+                <th scope="col" data-checkbox="true"></th>
+                <th data-field="Section Name and Title">Section</th>
+                <th data-field="Faculty">Faculty</th>
+                <th data-field="Available/ Capacity">Capacity</th>
+            </thead>
+        </table>
+        <div id="toolbar">
+            <button id="button" class="btn btn-outline-secondary" form="toolbar" value="Submit">Delete</button>
+        </div>
+        <form style="margin: 20px 0px; justify-self: center;" class='form-inline'>
+            <input style="margin-right: 10px;" type="email" class="form-control" placeholder="Enter email" required>
+            <button id="button" class="btn btn-outline-secondary" type="submit">Monitor!</button>
+        </form>
+    </div>
+    
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            const $table = $('.table');
+            const $button = $('#button');
+
+            var data = JSON.parse(sessionStorage.getItem('user_courses'))
+            data = data ? data : [];
+            $table.bootstrapTable({data: data});
+
+            $button.click(function (e) {
+                const collected = $table.bootstrapTable('getSelections');
+                data = data.filter(course => {
+                    return !collected.some(element => element['Section Name and Title'] === course['Section Name and Title'])
+                })
+                location.href = "/cart"
+                sessionStorage.setItem('user_courses', JSON.stringify( [...data] ));
+            })
+            
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+    <div style='background-color: white; margin-bottom: 0; padding: 0 0 1rem 0;' class="jumbotron jumbotron-fluid">
+        <div style="display: flex; flex-direction: column; align-items: center;" class="container">
+            <h1 class="display-4" id="jumbo-home"> Guelph <span> Alert </span> </h1>
+            <p style='text-align: center;' class="lead">
+                Do you get annoyed by having to constantly check webadvisor for that course you need? <br>
+                We are here to help! Guelph Alert was built due to the very same frustration! <br>
+                To understand how Guelph Alerts works, please visit the <a href='/faq'>faq</a>
+            </p>
+        </div>
+    </div>
+    <form class='search-form' id='search-form' method='post' action="/courses/">
+        <div id='term' class="input-group mb-3 selector">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Term</label>
+            </div>
+            <select required name='VAR1' class='custom-select'>
+                <option selected></option>
+                <option value='F20'>Fall 2020</option>
+            </select>
+        </div>
+        <div class="break"></div> <!-- break to a new row -->
+        
+        <div id='subject' class="input-group mb-3 selector">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Subject</label>
+            </div>
+            <select required name='LIST.VAR1_1' class='custom-select'>
+                <option selected></option>
+                {% for subject in subjects %}
+                    <option value={{subject}}>{{subject}}</option>
+                {%endfor%}
+            </select>
+        </div>
+
+        <div id='year' class="input-group mb-3 selector">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Year</label>
+            </div>
+            <select required name='LIST.VAR2_1' class='custom-select'>
+                <option selected></option>
+                <option value="010">010 - Diploma - 1st Semester</option>
+                <option value="020">020 - Diploma - 2nd Semester</option>
+                <option value="030">030 - Diploma - 3rd Semester</option>
+                <option value="040">040 - Diploma - 4th Semester</option>
+                <option value="100">100 - First Year</option>
+                <option value="200">200 - Second Year</option>
+                <option value="300">300 - Third Year</option>
+                <option value="400">400 - Fourth Year</option>
+                <option value="500">500 - Graduate</option>
+                <option value="600">600 - Graduate</option>
+                <option value="700">700 - Graduate</option>
+                <option value="800">800 - Graduate</option>
+                <option value="900">900 - Transfer Credit</option>
+            </select>
+        </div>
+        <div class="break"></div> <!-- break to a new row -->
+
+        <div id='location' class="input-group mb-3 selector">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Location</label>
+            </div>
+            <select name='VAR6' class='custom-select'>
+                <option selected></option>
+                <option value="G">G - Guelph</option>
+                <option value="H">H - Guelph-Humber Campus</option>
+                <option value="M">M - McMaster Campus</option>
+                <option value="R">R - Ridgetown Campus</option>
+                <option value="S">S - Sheridan College</option>
+                <option value="SE">SE - Seneca College</option>
+                <option value="W">W - Waterloo Campus</option>
+                <option value="WL">WL - Laurier Campus</option>
+            </select>
+        </div>
+
+        <div id='level' class="input-group mb-3 selector">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Level</label>
+            </div>
+            <select name='VAR21' class='custom-select'>
+                <option selected></option>
+                <option value="DP">DP - Diploma</option>
+                <option value="GR">GR - Graduate</option>
+                <option value="UG">UG - Undergraduate</option>
+                <option value="UGGH">UGGH - Undergraduate Guelph-Humber</option>
+            </select>
+        </div>
+        <div class="break"></div> <!-- break to a new row -->
+        <button id="form-submit" form="search-form" value="Submit">Search</button>
+    <form>
+{% endblock %}
+
