@@ -20,30 +20,47 @@
         <div id="toolbar">
             <button id="button" class="btn btn-outline-secondary" form="toolbar" value="Submit">Delete</button>
         </div>
-        <form style="margin: 20px 0px; justify-self: center;" class='form-inline'>
-            <input style="margin-right: 10px;" type="email" class="form-control" placeholder="Enter email" required>
-            <button id="button" class="btn btn-outline-secondary" type="submit">Monitor!</button>
+        <form style="margin: 20px 0px; justify-self: center;" class='form-inline' id="submit-form">
+            <input style="margin-right: 10px;" name="email" type="email" class="form-control" placeholder="Enter email" required>
+            <button id="send" class="btn btn-outline-secondary" type="submit">Monitor!</button>
         </form>
     </div>
-    
-
 
     <script type="text/javascript">
         $(document).ready(function() {
             const $table = $('.table');
             const $button = $('#button');
+            const $form = $('#submit-form');
 
-            var data = JSON.parse(sessionStorage.getItem('user_courses'))
+            var data = JSON.parse(sessionStorage.getItem('user_courses'));
             data = data ? data : [];
             $table.bootstrapTable({data: data});
 
             $button.click(function (e) {
                 const collected = $table.bootstrapTable('getSelections');
                 data = data.filter(course => {
-                    return !collected.some(element => element['Section Name and Title'] === course['Section Name and Title'])
+                    return !collected.some(element => element['Section Name and Title'] === course['Section Name and Title']);
                 })
                 location.href = "/cart"
                 sessionStorage.setItem('user_courses', JSON.stringify( [...data] ));
+            })
+
+            $form.submit(function (e) {
+                e.preventDefault()
+                const curr_email = e.currentTarget[0].value;
+                fetch('/cart/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({email: curr_email, courses: data})
+                }).then(res => {
+                    location.href = "/"
+                }).catch(function (e) {
+                    console.log("Fetch request has failed");
+                    console.log(e)
+                })
             })
             
         })

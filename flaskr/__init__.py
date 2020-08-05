@@ -1,12 +1,10 @@
 import os
 from flask import (Flask, render_template)
-from . import courses
+from . import (courses, home, cart)
 import json
 
 
 def create_app(test_config=None):
-    with open('flaskr/utils/uog_config.json') as f:
-        config = json.load(f)
     
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -24,20 +22,9 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-    
-    @app.route('/', methods={'GET'})
-    def home():
-        return render_template('home.html', title="Home", subjects=config['subjects'])
 
-    @app.route('/cart', methods={'GET'})
-    def cart():
-        return render_template('cart.html', title="Cart")
-    
-    @app.route('/faq', methods={'GET'})
-    def faq():
-        return render_template('faq.html', title="FAQ")
-    
-    
+    app.register_blueprint(home.bp)
     app.register_blueprint(courses.courses_bp)
+    app.register_blueprint(cart.bp)
 
     return app

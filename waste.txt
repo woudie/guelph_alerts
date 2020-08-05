@@ -1,0 +1,10 @@
+                /*fetch('/cart/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({email:"", data:data})
+                })*/
+
+                                const curr_email = e.currentTarget[0].value
