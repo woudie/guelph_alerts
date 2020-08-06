@@ -5,3 +5,6 @@ lxml
 beautifulsoup4
 gunicorn
 flask-mongoengine
+apscheduler
+dnspython
+flask-apscheduler
