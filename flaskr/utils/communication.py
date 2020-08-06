@@ -3,7 +3,7 @@ import datetime
 
 class Communication:
     def __init__(self):
-        self.yag = yagmail.SMTP("tieria.dev@gmail.com", "5ahwEcLgC76evWC")
+        self.yag = yagmail.SMTP()
         self.subject='Course Alert for {course}'
         self.content='''
                 Hey!
