@@ -4,8 +4,8 @@ from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
 
 class Scheduler:
     def __init__(self):
-        comm = Communication()
-    
+        self.comm = Communication()
+        
     def addJob(self, func, time):
         pass
     

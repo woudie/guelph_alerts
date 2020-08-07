@@ -1,12 +1,12 @@
 import os
-from flask import (Flask, render_template)
+from flask import (Flask, render_template, json)
 from flask_mongoengine import MongoEngine
 from . import (courses, home, cart)
-import json
 
 
 def create_app(test_config=None):
     db = MongoEngine()
+    db_uri = "mongodb+srv://{user}:{passw}@cluster0-czbyg.mongodb.net/GuelphAlerts?retryWrites=true&w=majority"
     
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -18,10 +18,10 @@ def create_app(test_config=None):
     else:
         # load the test config if passed in
         app.config.from_mapping(test_config)
-    
+
     app.config['MONGODB_SETTINGS'] = {
         'db': 'GuelphAlerts',
-        'host':'mongodb+srv://woudie:wNTRDOLxIOMxmS2s@cluster0-czbyg.mongodb.net/GuelphAlerts?retryWrites=true&w=majority'
+        'host': db_uri.format(user=os.environ['DB_USERNAME'], passw=os.environ['DB_PASSWORD'])
     }
     
     db.init_app(app)
@@ -35,5 +35,5 @@ def create_app(test_config=None):
     app.register_blueprint(home.bp)
     app.register_blueprint(courses.courses_bp)
     app.register_blueprint(cart.bp)
-
+    
     return app
