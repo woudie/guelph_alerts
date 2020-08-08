@@ -1,15 +1,10 @@
-import mongoengine as me
-from datetime import datetime
+from mongoengine import *
+from datetime import (datetime, timedelta)
 
-class emails(me.Document):
-    email = me.StringField(required=True)
-    created = me.DateTimeField(default=datetime.utcnow)
-    meta = {
-        'indexes': [
-            {'fields': ['created'], 'expireAfterSeconds': 30}
-        ]
-    }
+class emails(Document):
+    email = StringField(required=True)
+    expire = StringField(required=True)
     
-class courses(me.Document):
-    course = me.StringField(required=True)
-    all_emails = me.ListField(me.ReferenceField(emails, reverse_delete_rule=me.CASCADE))
+class courses(Document):
+    course = StringField(required=True)
+    all_emails = ListField(ReferenceField(emails, reverse_delete_rule=PULL))
