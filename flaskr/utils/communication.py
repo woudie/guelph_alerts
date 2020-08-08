@@ -9,8 +9,7 @@ class Communication:
         self.content='''Hey!
                 
                 This is Guelph Alerts. Your course section {course} recently had space
-                open up at {time}. Go grab it quickly before it is taken! If the space is already
-                taken, remember you can re-register after the 2 week period to monitor again!
+                open up at {time}. Go grab it quickly before it is taken! If the space is already taken, remember you can re-register after the 2 week period to monitor again!
                 
                 Best of luck,
                 Guelph Alerts'''
