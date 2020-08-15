@@ -1,7 +1,10 @@
+import os
 import functools
 from flask import (current_app, Blueprint, flash, g, redirect, render_template, request, session, url_for, json)
 from datetime import (datetime, timedelta)
+
 from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.jobstores.mongodb import MongoDBJobStore
 
 from utils.db import (emails, courses)
 from utils.communication import Communication
@@ -9,8 +12,16 @@ from utils.worker import course_polling
 from utils.helper import cleanup_email
 
 comm = Communication()
+db_uri = "mongodb+srv://{user}:{passw}@cluster0-czbyg.mongodb.net/GuelphAlerts?retryWrites=true&w=majority"
+    
+jobstores = {
+  'default': MongoDBJobStore(database='apscheduler', 
+                             collection='jobs', 
+                             host=db_uri.format(user=os.environ['DB_USERNAME'], passw=os.environ['DB_PASSWORD']),
+                             port=27017)
+}
 
-sched = BackgroundScheduler(daemon=True)
+sched = BackgroundScheduler(daemon=True, jobstores=jobstores)
 sched.start()
 sched.add_job(cleanup_email, trigger='cron', hour='4', minute='20')
 
