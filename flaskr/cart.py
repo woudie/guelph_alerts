@@ -45,7 +45,7 @@ def submit():
         
         theCourse = theCourse[0] if len(theCourse) > 0 else courses(course=course['Section Name and Title'], all_emails=[])
         
-        if ( not len(theCourse) or not len(theCourse.all_emails)):
+        if ( sched.get_job(course['Section Name and Title']) == None or not len(theCourse) or not len(theCourse.all_emails)):
             print('Starting process for ' + course['Section Name and Title'])
             sched.add_job(course_polling, 'interval', seconds=10, args=[ course['Section Name and Title'], sched ], id=course['Section Name and Title'])
             
