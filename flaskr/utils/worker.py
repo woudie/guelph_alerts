@@ -6,7 +6,6 @@ from communication import Communication
 def course_polling(course_title, sched):
     comm = Communication()
     searchable = course_title.split(') ');
-    
     theCourse = courses.objects(course__in=[course_title])
     theCourse = theCourse[0] if len(theCourse) > 0 else theCourse
     if ( not len(theCourse) or not len(theCourse.all_emails)):

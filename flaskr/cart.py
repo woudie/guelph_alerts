@@ -10,19 +10,14 @@ from utils.db import (emails, courses)
 from utils.communication import Communication
 from utils.worker import course_polling
 from utils.helper import cleanup_email
-
+from utils.scheduler import Scheduler
 comm = Communication()
-db_uri = "mongodb+srv://{user}:{passw}@cluster0-czbyg.mongodb.net/GuelphAlerts?retryWrites=true&w=majority"
-    
-jobstores = {
-  'default': MongoDBJobStore(database='apscheduler', 
-                             collection='jobs', 
-                             host=db_uri.format(user=os.environ['DB_USERNAME'], passw=os.environ['DB_PASSWORD']),
-                             port=27017)
-}
 
-sched = BackgroundScheduler(daemon=True, jobstores=jobstores)
-sched.start()
+sched = Scheduler()
+if Scheduler.sched == None:
+    sched.startScheduler()
+    sched = Scheduler.sched
+
 sched.add_job(cleanup_email, trigger='cron', hour='4', minute='20')
 
 bp = Blueprint('cart', __name__, url_prefix='/cart')

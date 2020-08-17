@@ -2,11 +2,17 @@ import os
 from flask import (Flask, render_template, json)
 from flask_mongoengine import MongoEngine
 from . import (courses, home, cart)
-
+from utils.scheduler import Scheduler
 
 def create_app(test_config=None):
     db = MongoEngine()
     db_uri = "mongodb+srv://{user}:{passw}@cluster0-czbyg.mongodb.net/GuelphAlerts?retryWrites=true&w=majority"
+    
+    sched = Scheduler()
+    if Scheduler.sched == None:
+        sched.startScheduler()
+        sched = Scheduler.sched
+
     
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -35,5 +41,8 @@ def create_app(test_config=None):
     app.register_blueprint(home.bp)
     app.register_blueprint(courses.courses_bp)
     app.register_blueprint(cart.bp)
+    
+
+    sched.initScheduler()
     
     return app
