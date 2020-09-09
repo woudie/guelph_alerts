@@ -5,14 +5,17 @@ from communication import Communication
 
 def course_polling(course_title, sched):
     comm = Communication()
-    searchable = course_title.split(') ');
+
+    searchable = course_title.split(') ')
+    
     theCourse = courses.objects(course__in=[course_title])
     theCourse = theCourse[0] if len(theCourse) > 0 else theCourse
+    
     if ( not len(theCourse) or not len(theCourse.all_emails)):
         print('Removing process for ' + course_title)
         sched.remove_job(course_title)
         
-    all_courses = webadvisorQuery({'VAR1': 'F20' ,'VAR3': searchable[1], 'VAR6':'G'});
+    all_courses = webadvisorQuery({'VAR1': 'F20' ,'VAR3': searchable[1], 'VAR6':'G'})
         
     found = None
     for course in all_courses['data'].values():

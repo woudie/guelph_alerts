@@ -3,3 +3,6 @@ instance/
 build/
 __pycache__/
 testing/
+env.sh
+*env*
+venv/

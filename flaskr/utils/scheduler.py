@@ -24,7 +24,5 @@ class Scheduler:
                 Scheduler.sched.add_job(course_polling, 'interval', seconds=10, args=[ course, Scheduler.sched ], id=course)
             
         
-    def addJob(self, func, time):
-        pass
     
     

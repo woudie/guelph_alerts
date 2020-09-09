@@ -30,6 +30,3 @@ class Communication:
                       
                       Cheers,
                       Guelph Alerts''')
-    
-    def text():
-        pass
